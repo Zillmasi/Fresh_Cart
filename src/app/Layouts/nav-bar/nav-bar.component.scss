@@ -1,0 +1,42 @@
+nav{
+    background-color: #EEEEEE;
+}
+.navbar-brand{
+    font-family: "Bitter", serif;
+    font-weight: 700;
+    color: #21313C;
+}
+
+.dark-gray{
+    color: #21313C;
+}
+.green-color{
+    color: #0AAD0A;
+}
+.green-backcolor{
+    background-color: #0AAD0A;
+}
+
+.border-round{
+    border-radius: 50px;
+}
+.dropdown-toggle{
+    background-color: #0AAD0A ;
+    
+}
+.icone{
+ position: relative;
+
+ span{
+    position: absolute;
+    background-color: #0AAD0A;
+    top:0;
+    right:10px;
+    border-radius: 50%;
+    padding-inline: 7px;
+    padding-block: 2px;
+    font-size: 12px;
+ }
+}
+
+

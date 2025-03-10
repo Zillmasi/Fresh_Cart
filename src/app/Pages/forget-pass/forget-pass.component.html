@@ -1,0 +1,151 @@
+@let emailControlForget= forgetPassForm.get("email"); @let codeControl =
+ResetCodeForm.get("code"); @let emailControlReset = ResetPassForm.get("email");
+@let newPassControl = ResetPassForm.get("newPassword");
+
+<!-- --------------------------------------------------------------------------------------------------------------------------- -->
+
+@if(step == 1){
+    <section>
+        <h1 class="green-color fw-bold">forget password :</h1>
+      
+        <form [formGroup]="forgetPassForm" (submit)="postForgetPass()">
+          <div class="mt-4 mb-3">
+            <label for="email" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+              >Email :</label
+            >
+            <input
+              formControlName="email"
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="Enter Your Email...."
+            />
+            @if(emailControlForget?.errors && emailControlForget?.touched ){
+            <div
+              class="alert alert-danger d-flex align-items-center mt-1"
+              role="alert"
+            >
+              @if(emailControlForget?.getError("required")){
+              <div>Email is required</div>
+              } @else if(emailControlForget?.getError("email")){
+              <div>Email is Invaild</div>
+              }
+            </div>
+            }
+          </div>
+      
+          <button 
+          [disabled]="isLoding"
+          [disabled]="forgetPassForm.invalid"
+          type="submit"
+          class="main-btn">Send Code
+          @if(isLoding){
+            <i class="fas fa-spin fa-spinner"></i>
+            }
+        </button>
+        </form>
+      </section>
+}
+@else if(step==2){
+    <section>
+        <h1 class="green-color fw-bold">Verify Code :</h1>
+      
+        <form [formGroup]="ResetCodeForm" (submit)="postResetcode()">
+          <div class="mt-4 mb-3">
+            <label for="code" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+              >Enter Reset Code :</label
+            >
+            <input
+              formControlName="code"
+              type="text"
+              id="code"
+              class="form-control"
+              placeholder="Enter Reset Code...."
+            />
+            @if(codeControl?.errors && codeControl?.touched ){
+            <div
+              class="alert alert-danger d-flex align-items-center mt-1"
+              role="alert"
+            >
+              @if(codeControl?.getError("required")){
+              <div>Code is required</div>
+              } @else if(codeControl?.getError("pattern")){
+              <div>Reset Code should be valid</div>
+              }
+            </div>
+            }
+          </div>
+      
+          <button  
+
+          [disabled]="isLoding" class="main-btn">
+            Verify Code @if(isLoding){
+            <i class="fas fa-spin fa-spinner"></i>
+            }
+          </button>
+        </form>
+      </section>
+}
+
+@else if(step==3){
+    <section>
+        <h1 class="green-color fw-bold">Reset New Password :</h1>
+      
+        <form [formGroup]="ResetPassForm">
+          <div class="mt-4 mb-3">
+            <label for="email" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+              >Email :</label
+            >
+            <input
+              formControlName="email"
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="Enter Your Email...."
+            />
+            @if(emailControlReset?.errors && emailControlReset?.touched ){
+            <div
+              class="alert alert-danger d-flex align-items-center mt-1"
+              role="alert"
+            >
+              @if(emailControlReset?.getError("required")){
+              <div>Email is required</div>
+              } @else if(emailControlReset?.getError("email")){
+              <div>Email is Invaild</div>
+              }
+            </div>
+            }
+          </div>
+          <div class="mt-4 mb-3">
+            <label for="newPassword" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+              >New Password:</label
+            >
+            <input
+              formControlName="newPassword"
+              type="password"
+              id="newPassword"
+              class="form-control"
+              placeholder="Enter New Password...."
+            />
+            @if(newPassControl?.errors && newPassControl?.touched ){
+            <div
+              class="alert alert-danger d-flex align-items-center mt-1"
+              role="alert"
+            >
+              @if(newPassControl?.getError("required")){
+              <div>Password is required</div>
+              } @else if(newPassControl?.getError("pattern")){
+              <div>"must be at least 6 chars"</div>
+              }
+            </div>
+            }
+          </div>
+      
+          <button [disabled]="isLoding" class="main-btn">
+            Confirm @if(isLoding){
+            <i class="fas fa-spin fa-spinner"></i>
+            }
+          </button>
+        </form>
+      </section>
+}

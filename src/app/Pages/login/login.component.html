@@ -1,0 +1,74 @@
+<!-- 
+@let emailControl
+=loginForms.get('email'); @let passwordControl
+=loginForms.get('password'); -->
+
+<section>
+  <h1 class="text-capitalize fw-bold fs-1 green-color">Login now :</h1>
+  <form [formGroup]="loginForms" (ngSubmit)="submit()">
+    <div class="my-4">
+      <label for="email" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+        >Email :</label
+      >
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="form-control"
+        placeholder="Enter Your Email...."
+      />
+    </div>
+
+    <div class="my-4 position-relative">
+      <label for="password" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+        >Password :</label
+      >
+      <input
+        formControlName="password"
+        [type]="toggle ? 'password' : 'text'"
+        id="password"
+        class="form-control"
+        placeholder="Enter Your Password...."
+      />
+      @if(toggle){
+      <i class="fa-solid fa-eye" (click)="togglePass()"></i>
+      } @else{
+      <i class="fa-solid fa-eye-slash" (click)="togglePass()"></i>
+      }
+    </div>
+    <div class="d-flex align-items-center">
+      <button
+        [disabled]="isLoding"
+        type="submit"
+        class="login-btn border-0 text-white"
+      >
+        Login @if(isLoding){
+        <i class="fas fa-spin fa-spinner"></i>
+        }
+      </button>
+
+      <a
+        routerLink="/forgetPassword"
+        class="green-color ms-5 text-decoration-none"
+      >
+        Forget Password?
+      </a>
+    </div>
+  </form>
+
+  @if(isSucsses){
+  <div class="total-alert">
+    <div class="sucAlert">
+      <i class="fa-solid fa-circle-check" style="color: #0aad09"></i>
+      <span class="ps-2 d-block">{{ isSucsses }}</span>
+    </div>
+  </div>
+  } @else if (isError) {
+  <div class="total-alert">
+    <div class="errAlert">
+      <i class="fa-solid fa-circle-check" style="color: #ad0909"></i>
+      <span class="ps-2 d-block">{{ isError }}</span>
+    </div>
+  </div>
+  }
+</section>

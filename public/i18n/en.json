@@ -1,0 +1,72 @@
+{
+  "navbar": {
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "brands": "Brands",
+    "language":"Language",
+    "logOut": "LogOut",
+    "logIn":"login",
+    "register":"Register"
+  },
+  "homePage": {
+    "popularCategories":"Popular Categories",
+    "popularproducts":"Popular products",
+    "AddToCart":"Add To Cart",
+    "search":"Search",
+    "searchByName":"search By Name"
+  },
+  "footer":{
+    "GetTheFreshCartApp":"Get The FreshCart App",
+    "WewillsendyouAlinkOpenItInYourPhoneToDownloadApp":"We will send you a link, Open it in your phone to download App",
+    "enterYourEmail":"Enter Your Email",
+    "ShareAppLink":"ShareAppLink",
+    "PaymentPartners":"Payment Partners",
+    "GetDeliveriesWithFreshCart":"Get deliveries with FreshCart",
+    "CopyRight2025©ByAhmedAdelAllRightsReserved":"Copy Right 2025 © By Ahmed Adel All Rights Reserved"
+  },
+
+  "cart":{
+    "CartIsEmpty" : "Cart Is Empty",
+    "Product":"Product",
+    "Count" : "Count",
+    "Price":"Price",
+    "Action":"Action",
+    "CheckOut":"CheckOut",
+    "Total price":"Total price",
+    "clearAll":"Clear All"
+  },
+
+  "products":{
+    "AllProducts":"All Products "
+  },
+  "categories":{
+    "OurCategories":"Our Categories",
+    "pCat":"You can see our categories and each category includes the products in it"
+  },
+  "brands":{
+    "OurBrands":"Our Brands",
+    "pBrands":"You can see our brands and each brand includes the products in it"
+  },
+  "login":{
+    "loginNow":"login now",
+    "Email":"Email",
+    "Password":"Password",
+    "LogIn":"Log In",
+    "ForgetPass":"Forget Password "
+  },
+  "register":{
+    "registerNow":"Register now",
+    "Name":"Name",
+    "Email":"Email",
+    "Password":"Password",
+    "rePassword":"rePassword",
+    "Phone":"Phone",
+    "register":"Register"
+  },
+  "Wish":{
+    "h1":"Welcome to Your WishList"
+  }
+
+
+}

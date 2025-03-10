@@ -1,0 +1,30 @@
+footer {
+  background-color: #eeeeee;
+  padding-block: 3rem;
+  h2 {
+    font-size: 2rem;
+  }
+
+  input {
+    box-shadow: none;
+    outline: none;
+    &:focus {
+    border: 2px #0AAD0A solid;
+    }
+  }
+
+  button{
+    padding: 0.5rem 1.25rem;
+    background-color: #0AAD0A;
+    transition: 0.2s;
+    &:hover{
+        background-color: #198754;
+    }
+  }
+
+  img{
+    width: 5rem;
+    cursor: pointer;
+  }
+
+}

@@ -1,0 +1,35 @@
+<section class=" px-2">
+  <div class="d-flex justify-content-center text-center">
+    <div>
+      <h1 class="text-capitalize fw-bold my-2 fs-2 green-color">
+        Our Categories
+      </h1>
+      <p>
+        You can see our categories and each category includes the products in it
+      </p>
+    </div>
+
+
+
+  </div>
+
+  <div class="row mb-5">
+    @for (cat of categories; track $index){
+        <div class="d-grid col-12 col-md-6 col-lg-3">
+          <div 
+          [routerLink]="['/categoriesDetails/',cat._id]"
+          class="card shadow">
+            <div>
+              <div>
+                <img class="img-card w-100" [src]="cat.image" alt="" />
+              </div>
+              <div>
+                <h2 class="green-color fs-4 fw-bold text-capitalize text-center">{{cat.name}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+    }
+</div>
+
+</section>

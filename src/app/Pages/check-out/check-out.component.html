@@ -1,0 +1,100 @@
+@let detailsControl = payForm.get("details"); @let phoneControl =
+payForm.get("phone"); @let cityControl = payForm.get("city");
+
+<section>
+  <div class="d-flex justify-content-center align-items-center">
+    <h1 class="text-capitalize fw-bolder green-color">Payment</h1>
+  </div>
+
+  <form [formGroup]="payForm">
+    <div class="my-4">
+      <label for="details" class="d-block mb-2 fs-5 fw-bold dark-gray"
+        >Details :</label
+      >
+      <input
+        formControlName="details"
+        type="text"
+        id="details"
+        class="form-control"
+        placeholder="Enter Your Details...."
+      />
+      @if(detailsControl?.errors && detailsControl?.touched ){
+      <div
+        class="alert alert-danger d-flex align-items-center mt-1"
+        role="alert"
+      >
+        @if(detailsControl?.getError("required")){
+        <div>is required</div>
+        }
+      </div>
+      }
+    </div>
+    <div class="my-4">
+      <label for="phone" class="d-block mb-2 fs-5 fw-bold dark-gray"
+        >Phone :</label
+      >
+      <input
+        formControlName="phone"
+        type="tel"
+        id="phone"
+        class="form-control"
+        placeholder="Enter Your Phone...."
+      />
+
+      @if(phoneControl?.errors && phoneControl?.touched ){
+      <div
+        class="alert alert-danger d-flex align-items-center mt-1"
+        role="alert"
+      >
+        @if(phoneControl?.getError("required")){
+        <div>Phone is required</div>
+        } @else if(phoneControl?.getError("pattern")){
+        <div>accept only egypt phone numbers</div>
+        }
+      </div>
+      }
+    </div>
+    <div class="my-4">
+      <label for="city" class="d-block mb-2 fs-5 fw-bold dark-gray"
+        >City :</label
+      >
+      <input
+        formControlName="city"
+        type="text"
+        id="city"
+        class="form-control"
+        placeholder="Enter Your City...."
+      />
+      @if(cityControl?.errors && cityControl?.touched ){
+      <div
+        class="alert alert-danger d-flex align-items-center mt-1"
+        role="alert"
+      >
+        @if(cityControl?.getError("required")){
+        <div>is required</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <button
+      (click)="OnlinePay()"
+
+      type="submit" class="main-btn text-white border-0">
+        <i class="fa-solid fa-credit-card pe-1"></i>
+
+        Online Payment
+      </button>
+
+      <button 
+      (click)="cashPay()"
+
+      type="submit" class="main-btn text-white border-0">
+        <i class="fa-solid fa-money-bill-wave pe-1"></i>
+
+        Cash Payment
+      </button>
+    </div>
+  </form>
+</section>

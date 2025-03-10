@@ -1,0 +1,111 @@
+<section class="carol overflow-hidden ">
+  <owl-carousel-o [options]="customMainSlider">
+    <ng-template carouselSlide>
+      <img src="/images/img1.avif" alt="" class="w-100" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img2.avif" alt="" class="w-100" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img3.avif" alt="" class="w-100" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img4.avif" alt="" class="w-100" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img5.avif" alt="" class="w-100" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img6.avif" alt="" class="w-100" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img7.avif" alt="" class="w-100" />
+    </ng-template>
+  </owl-carousel-o>
+</section>
+
+<section class="my-5 overflow-hidden ">
+  <h1 class="text-capitalize fw-bold fs-2 mb-4 green-color">
+    Popular Categories :
+  </h1>
+
+  <owl-carousel-o [options]="customOptions">
+    @for (cat of categories ; track cat._id) {
+    <ng-template carouselSlide>
+      <div class="gap-x-10 cursor-pointer">
+        <img [src]="cat.image" alt="{{ cat.name }}" height="280px" />
+        <h3 class="text-center fs-3 fw-semibold green-color">
+          {{ cat.name }}
+        </h3>
+      </div>
+    </ng-template>
+
+    }
+  </owl-carousel-o>
+</section>
+
+<section class="cards px-2">
+  <h1 class="text-capitalize fw-bold fs-2 mb-4 green-color">
+    Popular products :
+  </h1>
+
+<div class="search-bar d-flex justify-content-center align-items-center my-4 ">
+  <i class="fa-solid fa-magnifying-glass "></i>
+  <input  [(ngModel)]="text" type="search" class="form-control  py-3  " placeholder="Search By Name ...">
+  <button type="button" class="search-btn main-btn fw-semibold">
+    Search
+  </button>
+</div>
+
+
+<div class="row">
+  @for (product of products.slice(28 , 40) |search:text ; track product.id) {
+    <div class="d-grid col-12 col-md-6 col-lg-3 ">
+    <div class="card shadow">
+    <div [routerLink]="['/details/', product.id]">
+      <div>
+        <img
+          class="img-card"
+          [src]="product.imageCover"
+          alt="{{ product.title }}"
+        />
+      </div>
+      <div>
+        <span class="text-capitalize green-color">{{
+          product.category.name
+        }}</span>
+        <h2 class="darkerGray-color fs-4 fw-bold text-capitalize">
+          {{ product.title | split : 2 }}
+        </h2>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fs-5 fw-semibold darkGray-color">{{
+          product.price | currency : "EGP "
+        }}</span>
+        <span class="fw-semibold darkGray-color">
+          <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+          {{ product.ratingsAverage }}
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-2 d-flex justify-content-between">
+      <button 
+      (click)="getCart(product.id)"
+      class="card-btn text-white border-0">
+        <i class="fa-solid fa-cart-plus pe-3"></i>
+        Add To Cart
+      </button>
+      <button
+      (click)="postWish(product.id)"
+      class="wish-btn fs-4 border-0">
+        <i class="fa-solid fa-heart"></i>
+      </button>
+    </div>
+  </div>
+</div>
+  }
+</div>
+  
+
+</section>

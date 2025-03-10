@@ -1,0 +1,84 @@
+
+section{
+  padding-top: 120px;
+}
+
+.cards {
+    padding-bottom: 5rem;
+    padding-right: 1.5rem;
+    .card {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      padding-bottom: 1.25rem;
+      margin-top: 1.5rem;
+      background-color: #fff;
+      border-color: rgb(229, 231, 235);
+      border-radius: 0.75rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      &:hover{
+        transform: scale(1.02);
+        box-shadow: 0 7px 14px 3px #0000002d;
+      }
+    }
+    .img-card {
+      padding: 2rem;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+    }
+    .cart-btn {
+      background-color: #0aad0a;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.5rem;
+      transition: 0.2s;
+      &:hover {
+        background-color: #198754;
+        
+      }
+    }
+    .wish-btn {
+      color: #dc2626;
+      background-color: #fff;
+      transition: 0.2s;
+      &:hover {
+        color: rgb(153, 27, 27);
+        
+  
+      }
+    }
+    
+  .search-bar{
+    width: 60%;
+    margin-inline: auto;
+    position: relative;
+    
+  input {
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(128, 128, 128, 0.186);
+    box-shadow: none;
+    font-size: 13px;
+    padding-left: 40px;
+    &:focus {
+      outline: 2px solid #0aad0a;
+    }
+  }
+.fa-solid{
+  position: absolute;
+  left: 5px;
+  margin-left: 10px;
+  font-size: 14px;
+}
+  .search-btn{
+    position: absolute;
+    right: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    
+  }
+  }
+  }
+  

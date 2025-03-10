@@ -1,0 +1,174 @@
+@let nameControl = registerForms.get('name'); @let emailControl
+=registerForms.get('email'); @let passwordControl
+=registerForms.get('password'); @let rePasswordControl
+=registerForms.get('rePassword'); @let phoneControl =
+registerForms.get('phone');
+<!-- ---------------------------------------------------------------------------------- -->
+
+<section class="position-relative">
+  <h1 class="text-capitalize fw-bold fs-1 green-color">Register now :</h1>
+
+  <form [formGroup]="registerForms" (ngSubmit)="submit()">
+    <div class="mt-5 mb-4">
+      <label for="Name" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+        >Name :</label
+      >
+      <input
+        formControlName="name"
+        type="text"
+        id="Name"
+        class="form-control"
+        placeholder="Enter Your Name...."
+      />
+      @if(nameControl?.errors && nameControl?.touched ){
+      <div
+        class="alert alert-danger d-flex align-items-center mt-1"
+        role="alert"
+      >
+        @if(nameControl?.getError("required")){
+        <div>Name is required</div>
+        } @else if(nameControl?.getError("minlength")){
+        <div>Name Should be more than or equal 3 chars</div>
+        } @else if(nameControl?.getError("maxlength")){
+        <div>Name Should be less than or equal 20 chars</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="my-4">
+      <label for="email" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+        >Email :</label
+      >
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="form-control"
+        placeholder="Enter Your Email...."
+      />
+      @if(emailControl?.errors && emailControl?.touched ){
+      <div
+        class="alert alert-danger d-flex align-items-center mt-1"
+        role="alert"
+      >
+        @if(emailControl?.getError("required")){
+        <div>Email is required</div>
+        } @else if(emailControl?.getError("email")){
+        <div>Email is Invaild</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="my-4 position-relative">
+      <label for="password" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+        >Password :</label
+      >
+      <input
+        formControlName="password"
+        [type]="toggleRePasss ? 'password' : 'text'"
+        id="password"
+        class="form-control"
+        placeholder="Enter Your Password...."
+      />
+      @if(toggleRePasss){
+      <i class="fa-solid fa-eye" (click)="toggleRePass()"></i>
+      } @else{
+      <i class="fa-solid fa-eye-slash" (click)="toggleRePass()"></i>
+      } @if(passwordControl?.errors && passwordControl?.touched ){
+      <div
+        class="alert alert-danger d-flex align-items-center mt-1"
+        role="alert"
+      >
+        @if(passwordControl?.getError("required")){
+        <div>Password is required</div>
+        } @else if(passwordControl?.getError("pattern")){
+        <div>must be at least 6 chars</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="my-4 position-relative">
+      <label for="RePassword" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+        >RePassword :</label
+      >
+      <input
+        formControlName="rePassword"
+        [type]="toggleRePasss ? 'password' : 'text'"
+        id="RePassword"
+        class="form-control"
+        placeholder="Confirm Your Password...."
+      />
+      @if(toggleRePasss){
+      <i class="fa-solid fa-eye" (click)="toggleRePass()"></i>
+      } @else{
+      <i class="fa-solid fa-eye-slash" (click)="toggleRePass()"></i>
+      } @if((registerForms.getError('mismatch')||rePasswordControl?.errors) &&
+      rePasswordControl?.touched){
+      <div
+        class="alert alert-danger d-flex align-items-center mt-1"
+        role="alert"
+      >
+        @if(rePasswordControl?.getError('required')){
+        <div>RePassword is required</div>
+        } @else if(registerForms.getError('mismatch')){
+        <div>Password confirmation is incorrect</div>
+        }
+      </div>
+      }
+    </div>
+    <div class="my-4">
+      <label for="phone" class="d-block mb-2 fs-6 fw-semibold dark-gray"
+        >Phone :</label
+      >
+      <input
+        formControlName="phone"
+        type="tel"
+        id="phone"
+        class="form-control"
+        placeholder="Enter Your Phone...."
+      />
+      @if(phoneControl?.errors && phoneControl?.touched ){
+      <div
+        class="alert alert-danger d-flex align-items-center mt-1"
+        role="alert"
+      >
+        @if(phoneControl?.getError("required")){
+        <div>Phone is required</div>
+        } @else if(phoneControl?.getError("pattern")){
+        <div>accept only egypt phone numbers</div>
+        }
+      </div>
+      }
+    </div>
+
+    <button
+      [disabled]="isLoding"
+      type="submit"
+      class="register-btn text-white border-0"
+    >
+     Register
+
+      @if(isLoding){
+      <i class="fas fa-spin fa-spinner"></i>
+      }
+    </button>
+  </form>
+  @if(isSucsses){
+  <div class="total-alert">
+    <div class="sucAlert">
+      <i class="fa-solid fa-circle-check" style="color: #0aad09"></i>
+      <span class="ps-2 d-block">{{ isSucsses }}</span>
+    </div>
+  </div>
+  } @else if(isSucsses){
+  <div class="total-alert">
+    <div class="errAlert">
+      <i class="fa-solid fa-circle-check" style="color: #ad0909"></i>
+      <span class="ps-2 d-block">{{ isError }}</span>
+    </div>
+  </div>
+  }
+</section>

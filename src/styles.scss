@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import 'ngx-toastr/toastr';
+
+
+body {
+    background-image: url(https://fresh-cart-one.vercel.app/static/media/light-patten.ed706aff39a009de4e80.svg);
+    font-family: "Bitter", serif;
+}
+
+.dark-gray{
+    color: #21313C;
+}
+.green-color{
+    color: #0AAD0A;
+}
+.green-backcolor{
+    background-color: #0AAD0A;
+}
+
+.border-round{
+    border-radius: 50px;
+}
+
+.card-color{
+    background-color: #FFFFFF;
+}
+.darkerGray-color{
+    color: #111827;
+  }
+  .dark-gray{
+    color: #374151;
+  }
+
+  .main-btn {
+    background-color: #0aad0a;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    transition: 0.2s;
+    color:white;
+    border: none;
+    &:hover {
+      background-color: #198754;
+    }
+  }

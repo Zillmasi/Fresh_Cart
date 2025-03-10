@@ -1,0 +1,59 @@
+<section class="px-2">
+<div class="d-flex justify-content-center">
+    <h1 class="text-capitalize fw-bold my-2 fs-2 green-color">
+        Welcome to Your WishList
+      </h1>
+</div>
+
+<div class="row">
+    @for (w of wish; track w._id) {
+      <div class="d-grid col-12 col-md-6 col-lg-3 ">
+      <div class="card shadow">
+      <div >
+        <div>
+          <img
+            class="img-card"
+            [src]="w.imageCover"
+            alt="{{ w.title }}"
+          />
+        </div>
+        <div>
+          <span class="text-capitalize green-color">{{
+            w.category.name
+          }}</span>
+          <h2 class="darkerGray-color fs-4 fw-bold text-capitalize">
+            {{ w.title | split : 2 }}
+          </h2>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="fs-5 fw-semibold darkGray-color">{{
+            w.price | currency : "EGP "
+          }}</span>
+          <span class="fw-semibold darkGray-color">
+            <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+            {{ w.ratingsAverage }}
+          </span>
+        </div>
+      </div>
+  
+      <div class="mt-2 d-flex justify-content-between">
+        <button 
+        (click)="getCart(w.id)"
+        class="card-btn text-white border-0">
+          <i class="fa-solid fa-cart-plus pe-3"></i>
+          Add To Cart
+        </button>
+        <button 
+        (click)="deleteItem(w._id)"
+        class="bg-transparent  border-0">
+        <i class="fa-solid fa-trash-can fs-5" style="color: #dd1d1d;"></i>
+          
+        </button>
+
+      </div>
+    </div>
+  </div>
+    }
+  </div>
+
+</section>

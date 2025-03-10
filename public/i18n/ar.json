@@ -1,0 +1,71 @@
+{
+  "navbar": {
+    "home": "الصفحه الرئيسيه",
+    "products": "المنتجات",
+    "categories": "الأقسام",
+    "brands": "العلامات التجارية",
+    "language": " اللغه",
+    "logOut": "تسجيل الخروج",
+    "logIn": "تسجيل الدخول",
+    "register": "إنشاء حساب"
+  },
+
+  "homePage": {
+    "popularCategories": "الفئات الشائعة",
+    "popularproducts": "المنتجات الشائعة",
+    "AddToCart": "أضف إلى السلة",
+    "search": "بحث",
+    "searchByName": "البحث بالاسم"
+  },
+  "footer": {
+    "GetTheFreshCartApp": "احصل على تطبيق FreshCart",
+    "WewillsendyouAlinkOpenItInYourPhoneToDownloadApp": "سنرسل لك رابطًا، افتحه على هاتفك لتنزيل التطبيق",
+    "enterYourEmail": "أدخل بريدك الإلكتروني",
+    "ShareAppLink": "مشاركة رابط التطبيق",
+    "PaymentPartners": "شركاء الدفع",
+    "GetDeliveriesWithFreshCart": "احصل على التوصيل مع FreshCart",
+    "CopyRight2025©ByAhmedAdelAllRightsReserved": "حقوق النشر 2025 © بواسطة أحمد عادل، جميع الحقوق محفوظة"
+  },
+  "cart": {
+    "CartIsEmpty": "السلة فارغة",
+    "Product": "المنتج",
+    "Count": "الكمية",
+    "Price": "السعر",
+    "Action": "الإجراء",
+    "CheckOut": "إتمام الشراء",
+    "TotalPrice": "السعر الإجمالي",
+    "clearAll": "مسح الكل"
+  },
+  "products": {
+    "AllProducts": "جميع المنتجات"
+  },
+  "categories": {
+    "OurCategories": "الفئات المتاحه",
+    "pCat": "يمكنك رؤية  الفئات المتاحه ، وكل فئة تحتوي على المنتجات الخاصة بها"
+  },
+
+  "brands": {
+    "OurBrands": "علاماتنا التجارية",
+    "pBrands": "يمكنك رؤية علاماتنا التجارية، وكل علامة تجارية تحتوي على المنتجات الخاصة بها"
+  },
+  "login": {
+    "loginNow": "تسجيل الدخول الآن",
+    "Email": "البريد الإلكتروني",
+    "Password": "كلمة المرور",
+    "LogIn": "تسجيل الدخول",
+    "ForgetPass": " نسيت كلمة المرور"
+  },
+  "register": {
+    "registerNow": "إنشاء حساب الآن",
+    "Name": "الاسم",
+    "Email": "البريد الإلكتروني",
+    "Password": "كلمة المرور",
+    "rePassword": "إعادة كلمة المرور",
+    "Phone": "رقم الهاتف",
+    "register": "إنشاء حساب"
+
+  },
+  "Wish": {
+    "h1": "مرحبًا بك في قائمة رغباتك"
+  }
+}

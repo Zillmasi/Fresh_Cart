@@ -1,0 +1,142 @@
+<nav class="navbar position-fixed top-0 start-0 end-0 navbar-expand-lg  z-3  shadow-sm ">
+    <div class="container-fluid">
+        <img src="https://woocommerce.com/wp-content/uploads/2023/01/product-icon.png?w=40"   alt="Logo">
+      <a routerLink="home" class="navbar-brand fs-2  "  >
+        Fresh Cart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+@if(isLogin()){
+  <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+    <li class="nav-item  ms-2">
+      <a class="nav-link py-2 px-3  dark-gray rounded btn" aria-current="page" routerLink="home" routerLinkActive="green-backcolor text-white rounded" >Home</a>
+    </li>
+    <li class="nav-item ms-2">
+      <a class="nav-link py-2 px-3 dark-gray rounded btn" aria-current="page" routerLink="products" routerLinkActive="green-backcolor text-white rounded" >Products</a>
+    </li>
+    <li class="nav-item ms-2">
+      <a class="nav-link py-2 px-3 dark-gray rounded btn " aria-current="page" routerLink="categories" routerLinkActive="green-backcolor text-white rounded" >Categories</a>
+    </li>
+    <li class="nav-item ms-2">
+      <a class="nav-link py-2 px-3 dark-gray rounded btn" aria-current="page" routerLink="brands" routerLinkActive="green-backcolor text-white rounded" >Brands</a>
+    </li>    
+
+  </ul>
+}
+
+        <ul class="navbar-nav   ms-auto mb-2 mb-lg-0">
+
+          @if(!isLogin()){
+  
+            <li class="nav-item ms-2">
+              <a class="nav-link py-2 px-3 dark-gray rounded btn" aria-current="page" routerLink="login" routerLinkActive="green-backcolor text-white  rounded" >Login</a>
+            </li>  
+            
+            <li class="nav-item ms-2">
+              <a class="nav-link  dark-gray rounded btn" aria-current="page" routerLink="register" routerLinkActive="green-backcolor text-white rounded" >Register</a>
+            </li>  
+          }
+
+          
+            @else {
+
+
+
+              <li class="nav-item ms-2 icone ">
+                <a class="nav-link py-2 px-3 dark-gray rounded btn " aria-current="page" routerLink="wishlist" routerLinkActive="green-color  rounded" >
+
+                    <i class="fa-solid fa-heart fs-4 "></i>
+                    <span
+                    class="text-white"
+                    >{{wishCount}}</span
+                  >
+                </a>
+              </li>  
+              <li class="nav-item ms-2 icone">
+                <a class="nav-link py-2 px-3 dark-gray rounded btn" aria-current="page" routerLink="cart" routerLinkActive="green-color  rounded" >
+
+                    <i class="fa-solid fa-cart-shopping fs-4"></i>
+                  
+                    <span
+                    class="text-white"
+                    >{{count}}</span
+                  >
+                </a>
+              </li>  
+
+            <li class="nav-item ms-2">
+            
+              <a
+                (click)="logOut()"
+              class="nav-link py-2 px-3 dark-gray rounded btn" aria-current="page" role="button" >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Log Out</a>
+            </li>    
+
+            }
+          </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+      <img src="https://woocommerce.com/wp-content/uploads/2023/01/product-icon.png?w=40" alt="Logo">
+      <a routerLink="home" class="navbar-brand fs-2 text-light">Fresh Cart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" routerLink="home" routerLinkActive="active-link">Home</a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" routerLink="products" routerLinkActive="active-link">Products</a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" routerLink="categories" routerLinkActive="active-link">Categories</a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" routerLink="brands" routerLinkActive="active-link">Brands</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <button type="button" class="nav-link dropdown-toggle text-light rounded btn" data-bs-toggle="dropdown">
+              Language
+            </button>
+            <ul class="dropdown-menu">
+              <li><a role="button" class="dropdown-item">English</a></li>
+              <li><a role="button" class="dropdown-item">Arabic</a></li>
+            </ul>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" routerLink="wishlist" routerLinkActive="active-icon">
+              <i class="fa-solid fa-heart fs-5"></i>
+            </a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" routerLink="cart" routerLinkActive="active-icon">
+              <i class="fa-solid fa-cart-shopping fs-5"></i>
+            </a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" routerLink="login" routerLinkActive="active-link">Login</a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" routerLink="register" routerLinkActive="active-link">Register</a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link text-light rounded btn" role="button">
+              <i class="fa-solid fa-right-from-bracket"></i> Log Out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav> -->
+  

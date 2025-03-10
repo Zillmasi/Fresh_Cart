@@ -1,0 +1,14 @@
+section{
+    padding-top: 120px;
+    padding-bottom: 80px;
+    input {
+        background-color: #f9fafb;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(128, 128, 128, 0.186);
+        box-shadow: none;
+        padding-right: 60px;
+        &:focus {
+          outline: 2px solid #0aad0a;
+        }
+      }
+}

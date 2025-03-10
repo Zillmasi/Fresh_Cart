@@ -1,0 +1,18 @@
+@if (categoriesDetails) {
+<section class=" px-2">
+    <div class="row align-items-center gy-5 ">
+      <div class="d-grid col-12 col-lg-4">
+        <img
+          [src]="categoriesDetails.image"
+          class="w-100 rounded-2 shadow"
+          [alt]="categoriesDetails.name"
+        />
+      </div>
+      <div class="d-grid col-12 col-lg-8">
+        <h2 class="fs-2 fw-bold green-color text-center">{{ categoriesDetails.name }}</h2>
+      </div>
+    </div>
+
+</section>
+
+}
