@@ -1,79 +1,67 @@
 @if(cartDetails.totalCartPrice){
-  <section>
+<section>
+  <div class="d-md-flex justify-content-between align-items-center mb-3">
 
+    <h2 class="green-color fw-bold fs-3">
+      Total Price : {{ cartDetails.totalCartPrice | currency : " EGP " }}
+    </h2>
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2 class="green-color fw-bold fs-4"> Total Price :  {{ cartDetails.totalCartPrice | currency : " EGP " }}</h2>
-      <button
-      (click)="clearCart()"
-      class="clear-btn text-white border-0 mb-2">
-        <i class="fa-solid fa-trash-can me-1 " ></i>
-    
-        {{"cart.clearAll" |translate    }}
-      </button>
-    
-    </div>
-    @for (prod of cartDetails.products; track prod.product._id) {
-      <div class=" tab-cart  d-flex justify-content-md-evenly justify-content-between py-3 px-3 px-md-0 mb-4 align-items-center rounded-2 text-center ">
-            
-          
-        <div class="img   ">
-              <img
-                [src]="prod.product.imageCover"
-                class=" w-100 shadow rounded-1"
-                alt=""
-              />
-            </div>
-            <div class="content ">
-              <h2 class="fs-3">{{prod.product.title.split(" " , 2).join("")}}</h2>
-            </div>
-            <div class="counter ">
-              <a
-              (click)="UpdateCount(prod.product._id , prod.count - 1)" 
-              role="button">
-                <i 
-                
-                class="fa-solid fa-circle-minus" style="color: #0aad0a"></i>
-              </a>
-              <span class="mx-2">    {{ prod.count }}</span>
-             <a
-             (click)="UpdateCount(prod.product._id , prod.count + 1)"
-             role="button">
-              <i class="fa-solid fa-circle-plus" style="color: #0aad0a"></i>
-             </a>
-            </div>
-            <div class=" fw-bold">
-              <span> {{ prod.price | currency : "EGP " }}</span>
-            </div>
-        
-            <div class="delete-item">
-           <a
-           (click)="deletItem(prod.product._id)"
-           role="button" class="border-0">
-           <i class="fa-solid fa-xmark fs-4 " style="color: #dd1d1d"></i>
-           </a>
-            </div>
+  </div>
+  @for (prod of cartDetails.products; track prod.product._id) {
+    <div class="card rounded-3 mb-5 shadow">
+      <div class="card-body p-4">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col-md-2 col-lg-2 col-xl-2">
+            <img
+              [src]="prod.product.imageCover"
+              class="img-fluid rounded-3 shadow" [alt]="prod.product.title">
           </div>
-    }
-    
-          <div class=" d-flex justify-content-center align-items-center mt-4">
-            <button
-            routerLink="/checkout"
-            (click)="setID(cartDetails._id)"
-            class="main-btn text-white border-0">
-    
-          
-              Check Out
+          <div class="col-md-3 col-lg-3 col-xl-3">
+            <p class="lead fw-bold my-3 my-md-0">{{prod.product.title}}</p>
+      
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-2 d-flex align-items-center">
+            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
+            (click)="UpdateCount(prod.product._id , prod.count - 1)">
+              <i class="fas fa-minus " style="color: #0aad0a; "></i>
+            </button>
+<span class="fw-semibold">{{prod.count}}</span>
+
+            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
+            (click)="UpdateCount(prod.product._id , prod.count + 1)">
+              <i class="fas fa-plus"  style="color: #0aad0a; "></i>
             </button>
           </div>
-    
-    </section>
-}
+          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+            <h5 class="mb-0 mt-2 fw-semibold">{{prod.price  |  currency:"EGP "  }}</h5>
+          </div>
+          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <a role="button" (click)="deletItem(prod.product._id)" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <button
+      routerLink="/checkout"
+      (click)="setID(cartDetails._id)"
+      class="main-btn text-white border-0"
+    >
+    <i class="fa-solid fa-money-check me-1"></i>
+      Check Out
+    </button>
+    <button (click)="clearCart()" class="clear-btn text-white border-0 ">
+      <i class="fa-solid fa-trash-can me-1"></i>
 
-@else {
-
-  <div class="d-flex justify-content-center align-items-center py-2">
-    <h2 class="green-color fw-bolder fs-1">Cart Is Empty</h2>
+      {{ "cart.clearAll" | translate }}
+    </button>
   </div>
+</section>
+} @else {
+
+<div class="d-flex justify-content-center align-items-center py-2">
+  <h2 class="green-color fw-bolder fs-1">Cart Is Empty</h2>
+</div>
 }
