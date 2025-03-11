@@ -1,0 +1,142 @@
+@let emailControl=loginForms.get('email'); @let
+passwordControl=loginForms.get('password');
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+<section class="py-32 px-16 relative">
+  <h1 class="capitalize font-bold text-4xl text-[#0AAD0A]">
+    {{ "login.loginNow" | translate }}:
+  </h1>
+
+  <form [formGroup]="loginForms" (ngSubmit)="submit()">
+    <div class="my-6">
+      <label
+        for="Email"
+        class="block mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        {{ "login.Email" | translate }}
+
+        :</label
+      >
+      <input
+        formControlName="email"
+        type="email"
+        id="Email"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+      />
+      @if(emailControl?.errors && emailControl?.touched ){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if (emailControl?.getError('required')) {
+            <li>Email is required</li>
+            } @else if (emailControl?.getError('email')) {
+            <li>Email Should be Valid</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="my-6 relative">
+      <label
+        for="Password"
+        class="block mb-2 text-lg font-semibold text-gray-900 dark:text-white"
+      >
+        {{ "login.Password" | translate }} :
+      </label>
+
+      <input
+        formControlName="password"
+        [type]="toggle ? 'password' : 'text'"
+        id="Password"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+      />
+      @if(toggle){
+      <i
+        class="fa-solid fa-eye absolute end-5 top-[50px] cursor-pointer"
+        (click)="togglePass()"
+      ></i>
+
+      } @else{
+      <i
+        class="fa-solid fa-eye-slash cursor-pointer absolute end-5 top-[50px]"
+        (click)="togglePass()"
+      ></i>
+      } @if(passwordControl?.errors && passwordControl?.touched ){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if (passwordControl?.getError('required')) {
+            <li>Password is required</li>
+            } @else if (passwordControl?.getError('pattern')) {
+            <li>Password Should be Valid</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+
+    <button
+      [disabled]="isLoding"
+      type="submit"
+      class="bg-[#0AAD0A] disabled:bg-gray-700 text-white px-12 py-2 rounded-lg hover:bg-[#198754] transition-colors duration-200"
+    >
+      {{ "login.LogIn" | translate }}
+
+      @if(isLoding){
+      <i class="fas fa-spin fa-spinner"></i>
+      }
+    </button>
+
+    <a
+      routerLink="/forgetPassword"
+      class="ms-10 text-[#0AAD0A] hover:text-[#198754] transition-colors"
+    >
+      {{ "login.ForgetPass" | translate }}?
+    </a>
+
+    @if(isSucsses){
+    <div
+      id="toast-default"
+      class="flex items-center justify-center fixed top-10 start-0 end-0 mx-auto mt-14 shadow-lg w-full max-w-xs border border-green-300 p-4 text-green-800 bg-green-50 rounded-lg dark:text-green-400 dark:border-green-800"
+      role="alert"
+    >
+      <div class="ms-3 text-xl font-semibold">
+        <i class="fa-solid fa-circle-check" style="color: #0aad0a"></i>
+        {{ isSucsses }}
+      </div>
+    </div>
+    }
+  </form>
+</section>

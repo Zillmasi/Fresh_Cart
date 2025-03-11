@@ -1,0 +1,8 @@
+footer{
+    button{
+        transition: all .2s;
+        &:hover{
+            background-color: #198754;
+        }
+    }
+}

@@ -1,0 +1,138 @@
+<section class="pt-32 md:px-6 overflow-hidden">
+  <owl-carousel-o [options]="customMainSlider">
+    <ng-template carouselSlide>
+      <img src="/images/img1.avif" alt="" class="w-full bg-cover" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img2.avif" alt="" class="w-full bg-cover" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img3.avif" alt="" class="w-full bg-cover" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img4.avif" alt="" class="w-full bg-cover" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img5.avif" alt="" class="w-full bg-cover" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img6.avif" alt="" class="w-full bg-cover" />
+    </ng-template>
+    <ng-template carouselSlide>
+      <img src="/images/img7.avif" alt="" class="w-full bg-cover" />
+    </ng-template>
+  </owl-carousel-o>
+</section>
+
+<section class="pt-10 md:px-6">
+  <h1 class="capitalize font-bold text-4xl mb-7 text-[#0AAD0A]">
+    {{ "homePage.popularCategories" | translate }} :
+  </h1>
+
+  <owl-carousel-o [options]="customOptions">
+    @for (cat of categories ; track cat._id) {
+    <ng-template carouselSlide>
+      <div class="gap-x-10 cursor-pointer">
+        <img [src]="cat.image" alt="{{ cat.name }}" class="h-[280px]" />
+        <h3 class="text-center text-lg font-semibold text-[#0AAD0A]">
+          {{ cat.name }}
+        </h3>
+      </div>
+    </ng-template>
+
+    }
+  </owl-carousel-o>
+</section>
+
+<section class="pb-20 px-6">
+  <h1 class="capitalize font-bold text-4xl text-[#0AAD0A]">
+    {{ "homePage.popularproducts" | translate }} :
+  </h1>
+
+  <div class="relative max-w-md mx-auto my-9">
+    <div
+      class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+    >
+      <svg
+        class="w-4 h-4 text-gray-500 dark:text-gray-400"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 20 20"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+        />
+      </svg>
+    </div>
+    <input
+      [(ngModel)]="text"
+      type="search"
+      id="default-search"
+      class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#0AAD0A] focus:border-[#0AAD0A] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+      placeholder="{{ 'homePage.searchByName' | translate }}"
+    />
+    <button
+      type="submit"
+      class="text-white absolute end-2.5 bottom-2.5 bg-[#0aad0a] hover:bg-[#198754] font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#0AAD0A] dark:hover:bg-[#198754] dark:focus:ring-[#198754] transition-colors"
+    >
+      {{ "homePage.search" | translate }}
+    </button>
+  </div>
+
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
+    @for (product of products.slice(28 , 40) |search:text ; track product.id) {
+    <div
+      class="card w-full px-5 pb-5 shadow-lg cursor-pointer mt-6 overflow-hidden bg-[#fff] border border-gray-200 rounded-xl dark: dark:"
+    >
+      <div [routerLink]="['/details/', product.id]">
+        <div class="">
+          <img
+            class="p-8 rounded-t-lg w-full h-[250px] object-contain"
+            [src]="product.imageCover"
+            alt="{{ product.title }}"
+          />
+        </div>
+
+        <div class="">
+          <span class="capitalize text-[#0AAD0A]">{{
+            product.category.name
+          }}</span>
+          <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:">
+            {{ product.title | split : 2 }}
+          </h2>
+
+          <div class="flex items-center justify-between">
+            <span class="text-xl font-semibold text-gray-700 dark:">{{
+              product.price | currency : "EGP "
+            }}</span>
+            <span class="font-semibold text-gray-700">
+              <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+              {{ product.ratingsAverage }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 flex justify-between">
+        <button
+          (click)="getCart(product.id)"
+          class="cart-btn bg-[#0AAD0A] hover:bg-[#198754] transition-colors text-white px-5 py-2 rounded-lg"
+        >
+          <i class="fa-solid fa-cart-plus pe-3"></i>
+          {{ "homePage.AddToCart" | translate }}
+        </button>
+        <button
+        (click)="postWish(product.id)"
+          class="cart-btn text-red-600 hover:text-red-800  transition-colors text-2xl rounded-lg"
+        >
+          <i class="fa-solid fa-heart"></i>
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</section>

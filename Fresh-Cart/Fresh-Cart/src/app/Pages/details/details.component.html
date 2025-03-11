@@ -1,0 +1,39 @@
+@if (productsDetails) {
+    <section class="my-20 mx-6 p-6">
+        <div class=" md:flex justify-between items-center gap-10 ">
+          <div class="img mb-7 md:mb-0 md:w-[30%] rounded-lg">
+            <img [src]="productsDetails.imageCover" class="w-full " alt="" />
+          </div>
+          <div class="md:w-[70%]">
+            <h2 class="text-3xl font-bold">{{ productsDetails.title }}</h2>
+            <p class="py-2 text-gray-700 text-lg">
+              {{ productsDetails.description }}
+            </p>
+            <span class="text-[#0AAD0A] ">{{ productsDetails.category.name }}</span>
+      
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-xl font-semibold text-gray-700 dark:"
+                >{{ productsDetails.price | currency : "EGP " }}
+              </span>
+              <span class="font-semibold text-gray-700">
+                <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                {{ productsDetails.ratingsAverage }}
+              </span>
+      
+            </div>
+            <div class="mt-5 flex justify-center ">
+              <button
+              (click)="getCart(productsDetails.id)"
+
+                class="cart-btn bg-[#0AAD0A] hover:bg-[#198754] w-full transition-colors text-white px-5 py-2 rounded-lg"
+              >
+                <i class="fa-solid fa-cart-plus pe-3"></i>
+                Add To Card
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+}
+

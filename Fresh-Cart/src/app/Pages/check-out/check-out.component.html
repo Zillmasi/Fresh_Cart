@@ -1,0 +1,155 @@
+@let DetailsControl =payForm.get("details"); @let phoneControl
+=payForm.get("phone"); @let cityControl =payForm.get("city");
+
+<!---------------------------------------------------------------------------------------------------------------------------->
+<section class="py-32 px-16 relative">
+  <h1 class="capitalize font-bold text-5xl flex justify-center text-[#0AAD0A]">
+    Payment
+  </h1>
+  <form [formGroup]="payForm" class="my-10">
+    <div class="mb-6">
+      <label
+        for="details-input"
+        class="block mb-2 font-bold text-lg text-gray-900 dark:text-white"
+      >
+        Details</label
+      >
+      <input
+        formControlName="details"
+        placeholder="Enter Your Details"
+        type="text"
+        id="details-input"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+      />
+      @if(DetailsControl?.errors && DetailsControl?.touched ){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if (DetailsControl?.getError('required')) {
+            <li>is required</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="mb-6">
+      <label
+        for="phone-input"
+        class="block mb-2 font-bold text-lg text-gray-900 dark:text-white"
+      >
+        Phone</label
+      >
+      <input
+        formControlName="phone"
+        placeholder="Enter Your phone"
+        type="text"
+        id="phone-input"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+      />
+      @if(phoneControl?.errors && phoneControl?.touched ){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if (phoneControl?.getError('required')) {
+            <li>is required</li>
+            } @else if (phoneControl?.getError('pattern')) {
+            <li>Phone Number Should be Valid</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="mb-6">
+      <label
+        for="city-input"
+        class="block mb-2 font-bold text-lg text-gray-900 dark:text-white"
+      >
+        City</label
+      >
+      <input
+        formControlName="city"
+        placeholder="Enter Your city"
+        type="text"
+        id="city-input"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+      />
+      @if(cityControl?.errors && cityControl?.touched ){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if (cityControl?.getError('required')) {
+            <li>is required</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="mt-5 sm:flex sm:justify-between lg:mx-6">
+      <button
+        (click)="OnlinePay()"
+        type="submit"
+        class="block bg-[#0AAD0A] hover:bg-[#198754] transition-colors text-white px-5 py-2 rounded-lg"
+      >
+        <i class="fa-solid fa-credit-card pe-3"></i>
+        Online Payment
+      </button>
+      <button
+        (click)="cashPay()"
+        type="submit"
+        class="block mt-4 sm:mt-0 bg-[#0AAD0A] hover:bg-[#198754] transition-colors text-white px-5 py-2 rounded-lg"
+      >
+        <i class="fa-solid fa-money-bill-wave pe-3"></i>
+        Cash Payment
+      </button>
+    </div>
+  </form>
+</section>

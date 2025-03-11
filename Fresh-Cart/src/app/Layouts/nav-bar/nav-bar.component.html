@@ -1,0 +1,273 @@
+<nav class="bg-gray-100  border-gray-200 shadow-lg]">
+  <div
+    class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
+    <a
+      routerLink="/home"
+      class="flex items-center space-x-3 rtl:space-x-reverse"
+    >
+      <img src="images/freshcart-logo.svg" class="h-8" alt="FreshCart Logo" />
+    </a>
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+    <div
+      class="md:hidden lg:flex flex-grow w-full md:w-auto"
+      id="navbar-default"
+    >
+      @if(isLogin()){
+      <ul
+        class="capitalize flex-grow flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-2 rtl:space-x-reverse md:mt-0 md:border-0"
+      >
+        <li>
+          <a
+            routerLink="/home"
+            routerLinkActive="text-white bg-[#0AAD0A]"
+            class="block py-2 px-3 text-gray-700 rounded-lg"
+            aria-current="page"
+            >{{ "navbar.home" | translate }}
+          </a>
+        </li>
+
+        <li>
+          <a
+            routerLink="/products"
+            routerLinkActive="text-white bg-[#0AAD0A]"
+            class="block py-2 px-3 text-gray-700 rounded-lg"
+            aria-current="page"
+            >{{ "navbar.products" | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/categories"
+            routerLinkActive="text-white bg-[#0AAD0A]"
+            class="block py-2 px-3 text-gray-700 rounded-lg"
+            aria-current="page"
+            >{{ "navbar.categories" | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/brands"
+            routerLinkActive="text-white bg-[#0AAD0A]"
+            class="block py-2 px-3 text-gray-700 rounded-lg"
+            aria-current="page"
+            >{{ "navbar.brands" | translate }}</a
+          >
+        </li>
+      </ul>
+      }
+
+      <ul
+        class="capitalize ms-auto flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-2 rtl:space-x-reverse md:mt-0 md:border-0"
+      >
+        @if(!isLogin()){
+        <li class="md:me-6 mb-7 md:mb-0">
+          <button
+            id="dropdownDelayButton"
+            data-dropdown-toggle="dropdownDelay"
+            data-dropdown-delay="500"
+            data-dropdown-trigger="hover"
+            class="text-white bg-[#0AAD0A] hover:bg-[#198754] focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-[#0AAD0A] dark:hover:bg-[#198754] transition-colors"
+            type="button"
+          >
+            {{ "navbar.language" | translate }}
+            <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            id="dropdownDelay"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownDelayButton"
+            >
+              <li>
+                <a
+                  (click)="changeLang('en')"
+                  [class.hidden]="currentLang('en')"
+                  role="button"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >English</a
+                >
+              </li>
+              <li>
+                <a
+                  (click)="changeLang('ar')"
+                  [class.hidden]="currentLang('ar')"
+                  role="button"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Arabic</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li>
+          <a
+            routerLink="/login"
+            routerLinkActive="text-white bg-[#0AAD0A]"
+            class="block py-2 px-3 text-gray-700 rounded-lg"
+            aria-current="page"
+          >
+            {{ "navbar.logIn" | translate }}
+          </a>
+        </li>
+
+        <li>
+          <a
+            routerLink="/register"
+            routerLinkActive="text-white bg-[#0AAD0A]"
+            class="block py-2 px-3 text-gray-700 rounded-lg"
+            aria-current="page"
+          >
+            {{ "navbar.register" | translate }}</a
+          >
+        </li>
+
+        } 
+        
+        @else {
+
+        <li class="mb-4 md:mb-0">
+          <button
+            id="dropdownDelayButton"
+            data-dropdown-toggle="dropdownDelay"
+            data-dropdown-delay="500"
+            data-dropdown-trigger="hover"
+            class="text-white bg-[#0AAD0A] hover:bg-[#198754] focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-[#0AAD0A] dark:hover:bg-[#198754] transition-colors"
+            type="button"
+          >
+            {{ "navbar.language" | translate }}
+            <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            id="dropdownDelay"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownDelayButton"
+            >
+              <li>
+                <a
+                  (click)="changeLang('en')"
+                  [class.hidden]="currentLang('en')"
+                  role="button"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >English</a
+                >
+              </li>
+              <li>
+                <a
+                  (click)="changeLang('ar')"
+                  [class.hidden]="currentLang('ar')"
+                  role="button"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Arabic</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="relative">
+          <a
+          routerLink="/wishlist"
+          routerLinkActive="text-[#0AAD0A] "
+          class="block py-2 px-3 rounded-lg"
+          aria-current="page"
+        >
+
+        <i class="fa-solid fa-heart text-xl"></i>
+        <span
+        class="bg-[#0aad0a] rounded-full text-white px-2 text-sm absolute top-0 end-0"
+        >{{wishCount}}</span
+      >
+      </a>
+        </li>
+
+        <li class="relative">
+          <a
+            routerLink="/cart"
+            routerLinkActive="text-[#0AAD0A] "
+            class="block py-2 px-3 rounded-lg"
+            aria-current="page"
+          >
+            <i class="fa-solid fa-cart-shopping text-xl"></i>
+            <span
+              class="bg-[#0aad0a] rounded-full text-white px-2 text-sm absolute top-0 end-0"
+              >{{ count }}</span
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            (click)="logOut()"
+            role="button"
+            class="block py-2 px-3 text-gray-700 rounded-lg hover:text-[#0AAD0A] transition-colors"
+            aria-current="page"
+          >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            {{ "navbar.logOut" | translate }}</a
+          >
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
