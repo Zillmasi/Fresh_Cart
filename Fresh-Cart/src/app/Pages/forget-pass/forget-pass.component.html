@@ -1,0 +1,262 @@
+@let emailControlForget= forgetPassForm.get("email");
+@let codeControl = ResetCodeForm.get("code");
+@let emailControlReset = ResetPassForm.get("email");
+@let newPassControl = ResetPassForm.get("newPassword");
+
+@if(step == 1){
+  <section class="py-32 px-16 relative">
+    <h1 class="capitalize font-bold text-4xl text-[#0AAD0A]">
+      forget password :
+    </h1>
+  
+    <form [formGroup]="forgetPassForm" class="mb-6" (submit)="postForgetPass()" >
+  <div class="my-9">
+      <label
+      for="email-input"
+      class="block mb-1 text-xl font-medium text-gray-900 dark:text-white"
+      >Email :</label
+    >
+      <input
+      formControlName="email"
+        type="email"
+        id="input"
+        placeholder="Enter Your Email"
+        class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+      />
+      @if(emailControlForget?.errors && emailControlForget?.touched ){
+        <div
+          class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <ul class="mt-1.5 list-disc list-inside">
+              @if (emailControlForget?.getError('required')) {
+              <li>Email is required</li>
+              } @else if (emailControlForget?.getError('email')) {
+              <li>Email Should be Valid</li>
+              }
+            </ul>
+          </div>
+        </div>
+        }
+  </div>
+      <button
+        [disabled]="isLoding"
+        [disabled]="forgetPassForm.invalid"
+        type="submit"
+        class="bg-[#0AAD0A] disabled:bg-gray-700 text-white px-12 py-2 rounded-lg hover:bg-[#198754] transition-colors duration-200"
+      >
+        Send Code 
+        
+        @if(isLoding==true){
+        <i class="fas fa-spin fa-spinner"></i>
+        }
+      </button>
+      @if(isSuccess){
+        <div
+          id="toast-default"
+          class="flex items-center justify-center fixed top-0 start-0 end-0 mx-auto mt-14 shadow-lg w-full max-w-xs border border-green-300 p-4 text-green-800 bg-green-50 rounded-lg dark:text-green-400 dark:border-green-800"
+          role="alert"
+        >
+          <div class="ms-3 text-xl font-semibold">
+            <i class="fa-solid fa-circle-check" style="color: #0aad0a"></i>
+            {{isSuccess}}
+          </div>
+        </div>
+        }
+  
+        @else if(isError){
+          <div
+            id="toast-default"
+            class="flex items-center justify-center fixed top-0 start-0 end-0 mx-auto mt-14 shadow-lg w-full max-w-xs border border-red-300 p-4 text-red-800 bg-red-50 rounded-lg dark:text-red-400 dark:border-red-800"
+            role="alert"
+          >
+            <div class="ms-3 text-lg font-semibold">
+              <i class="fa-solid fa-circle-xmark" style="color: #ad280a;"></i>
+              {{isError}}
+            </div>
+          </div>
+          }
+    </form>
+  </section>
+}
+@if (step == 2) {
+  <section class="py-32 px-16 relative">
+    <h1 class="capitalize font-bold text-4xl text-[#0AAD0A]">Verify Code :</h1>
+  
+    <form class="mb-6"  [formGroup]="ResetCodeForm" (submit)="postResetcode()">
+      <div class="my-9">
+        <label
+          for="resetCode-input"
+          class="block mb-1 text-xl font-medium text-gray-900 dark:text-white"
+          >Enter Reset Code :</label
+        >
+        <input
+        formControlName="code"
+          type="text"
+          id="resetCode-input"
+          placeholder="Enter Reset Code"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+        />
+  
+        @if(codeControl?.errors && codeControl?.touched){
+          <div
+          class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <ul class="mt-1.5 list-disc list-inside">
+              @if (codeControl?.getError('required')) {
+              <li>Reset Code is required</li>
+              } @else if (codeControl?.getError('pattern')) {
+              <li>Reset Code should be valid </li>
+              }
+            </ul>
+          </div>
+        </div>
+        }
+      </div>
+      <button
+        [disabled]="isLoding"
+        [disabled]="ResetCodeForm.invalid"
+        type="submit"
+        class="bg-[#0AAD0A] disabled:bg-gray-700 text-white px-12 py-2 rounded-lg hover:bg-[#198754] transition-colors duration-200"
+      >
+        Verify Code @if(isLoding){
+        <i class="fas fa-spin fa-spinner"></i>
+        }
+      </button>
+    </form>
+  </section>
+}
+@if(step ==3){
+  <section class="py-32 px-16 relative">
+    <h1 class="capitalize font-bold text-4xl text-[#0AAD0A]">
+      Reset New Password :
+    </h1>
+  
+    <form class="mb-6" [formGroup]="ResetPassForm">
+      <div class="my-9">
+        <label
+          for="email-input"
+          class="block mb-1 text-xl font-medium text-gray-900 dark:text-white"
+          >Email :</label
+        >
+        <input
+        formControlName="email"
+          type="email"
+          id="email-input"
+          placeholder="Enter Your Email"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+        />
+        
+        @if( emailControlReset?.errors &&  emailControlReset?.touched){
+          <div
+          class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <ul class="mt-1.5 list-disc list-inside">
+              @if ( emailControlReset?.getError('required')) {
+              <li>Email is required</li>
+              } @else if ( emailControlReset?.getError('pattern')) {
+              <li>Email should be valid </li>
+              }
+            </ul>
+          </div>
+        </div>
+        }
+      </div>
+      <div class="my-9">
+        <label
+          for="pass-input"
+          class="block mb-1 text-xl font-medium text-gray-900 dark:text-white"
+          >New Password :</label
+        >
+        <input
+        formControlName="newPassword"
+          type="password"
+          id="pass-input"
+          placeholder="Enter your New Password"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0AAD0A] focus:border-[#0AAD0A] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#0AAD0A] dark:focus:border-[#0AAD0A]"
+        />
+        @if( newPassControl?.errors &&  newPassControl?.touched){
+          <div
+          class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+            <ul class="mt-1.5 list-disc list-inside">
+              @if ( newPassControl?.getError('required')) {
+              <li>Password is required</li>
+              } @else if ( newPassControl?.getError('pattern')) {
+              <li>Password should be valid </li>
+              }
+            </ul>
+          </div>
+        </div>
+        }
+      </div>
+  
+      <button
+        [disabled]="isLoding"
+        [disabled]="ResetPassForm.invalid"
+        type="submit"
+        class="bg-[#0AAD0A] disabled:bg-gray-700 text-white px-12 py-2 rounded-lg hover:bg-[#198754] transition-colors duration-200"
+      >
+        Confirm @if(isLoding){
+        <i class="fas fa-spin fa-spinner"></i>
+        }
+      </button>
+    </form>
+  </section>
+  
+}
