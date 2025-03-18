@@ -30,7 +30,7 @@
   </h1>
 
   <owl-carousel-o [options]="customOptions">
-    @for (cat of categories ; track cat._id) {
+    @for (cat of categories() ; track cat._id) {
     <ng-template carouselSlide>
       <div class="gap-x-10 cursor-pointer">
         <img [src]="cat.image" alt="{{ cat.name }}" height="280px" />
@@ -59,7 +59,7 @@
 
 
 <div class="row">
-  @for (product of products.slice(28 , 40) |search:text ; track product.id) {
+  @for (product of products().slice(28 , 40) |search:text ; track product.id) {
     <div class="d-grid col-12 col-md-6 col-lg-3 ">
     <div class="card shadow">
     <div [routerLink]="['/details/', product.id]">

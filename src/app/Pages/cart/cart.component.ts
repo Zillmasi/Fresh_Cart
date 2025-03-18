@@ -74,7 +74,7 @@ export class CartComponent implements OnInit, OnDestroy {
               icon: 'success',
             });
             this.cartDetails = res.data;
-            this.cartService.cartCount.next(res.numOfCartItems)
+            this.cartService.cartCount.set(res.numOfCartItems)
           },
     
     
@@ -122,7 +122,7 @@ export class CartComponent implements OnInit, OnDestroy {
                 icon: 'success',
               });
               this.cartDetails = {} as ICartProducts;
-              this.cartService.cartCount.next(0)
+              this.cartService.cartCount.set(0)
             },
 
           });

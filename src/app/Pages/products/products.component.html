@@ -10,7 +10,7 @@
   </div>
 
   <div class="row">
-    @for (prod of AllProducts | paginate: { itemsPerPage: 8, currentPage: Page }|search:text 
+    @for (prod of AllProducts() | paginate: { itemsPerPage: 8, currentPage: Page }|search:text 
     ; track prod._id) {
     <div class="d-grid col-12 col-md-6 col-lg-3">
       <div class="card shadow">

@@ -1,5 +1,5 @@
 import { IspecificCat } from './../../Shared/Interfaces/ispecific-cat';
-import { Component, inject, Pipe, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, Pipe, OnInit, OnDestroy, WritableSignal, signal } from '@angular/core';
 import { ProductsService } from '../../Core/Services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Iproducts } from '../../Shared/Interfaces/iproducts';
@@ -24,7 +24,7 @@ export class DetailsComponent implements OnInit,OnDestroy {
   private readonly toastr = inject(ToastrService);
   productId!: string | null;
   productsDetails: Iproducts | null = null;
-  products: Iproducts[] = [];
+  products: WritableSignal<Iproducts[]> = signal([]);
   cartDetails: ICartProducts = {} as ICartProducts;
   subRouter:Subscription = new Subscription()
   subGetID:Subscription = new Subscription()
@@ -59,7 +59,7 @@ this.subRouter=  this.activatedRoute.paramMap.subscribe({
             'Product added successfully to your cart',
             'Fresh Cart'
           );
-          this.cartService.cartCount.next(res.numOfCartItems)
+          this.cartService.cartCount.set(res.numOfCartItems)
 
         }
       },

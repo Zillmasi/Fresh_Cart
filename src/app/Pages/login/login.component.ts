@@ -17,7 +17,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink , TranslatePipe  ],
+  imports: [ReactiveFormsModule, RouterLink  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

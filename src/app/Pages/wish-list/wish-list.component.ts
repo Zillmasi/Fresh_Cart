@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { WishListService } from '../../Core/Services/WishList/wish-list.service';
 import { IWishList } from '../../Shared/Interfaces/iwish-list';
 import { SplitPipe } from '../../Shared/Pipes/split.pipe';
@@ -11,37 +11,35 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-wish-list',
-  imports: [SplitPipe, CurrencyPipe, TranslatePipe],
+  imports: [SplitPipe, CurrencyPipe],
   templateUrl: './wish-list.component.html',
   styleUrl: './wish-list.component.scss',
 })
-export class WishListComponent implements OnInit,OnDestroy {
+export class WishListComponent implements OnInit, OnDestroy {
   private readonly wishList = inject(WishListService);
   private readonly cartService = inject(CartService);
   private readonly toastr = inject(ToastrService);
-  subGet:Subscription = new Subscription()
-  subcart:Subscription = new Subscription()
-  subdel:Subscription = new Subscription()
+  subGet: Subscription = new Subscription();
+  subcart: Subscription = new Subscription();
+  subdel: Subscription = new Subscription();
 
-
-
-  wish: IWishList[] = [];
+  wish:WritableSignal<IWishList[]> = signal([]);
 
   ngOnInit(): void {
     this.getData();
   }
 
   getData() {
- this.subGet =  this.wishList.getWishData().subscribe({
+    this.subGet = this.wishList.getWishData().subscribe({
       next: (res) => {
         console.log(res);
-        this.wish = res.data;
-        this.wishList.wishNum.next(res.data.length)
+        this.wish.set(res.data);
+        this.wishList.wishNum.set(res.data.length);
       },
     });
   }
   getCart(id: string): void {
- this.subcart=   this.cartService.postToCart(id).subscribe({
+    this.subcart = this.cartService.postToCart(id).subscribe({
       next: (res) => {
         console.log(res);
         if (res.status === 'success') {
@@ -49,7 +47,7 @@ export class WishListComponent implements OnInit,OnDestroy {
             'Product added successfully to your cart',
             'Fresh Cart'
           );
-          this.cartService.cartCount.next(res.numOfCartItems);
+          this.cartService.cartCount.set(res.numOfCartItems);
         }
       },
       error: (err) => {
@@ -69,7 +67,7 @@ export class WishListComponent implements OnInit,OnDestroy {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
- this.subdel =      this.wishList.deleteWishData(id).subscribe({
+        this.subdel = this.wishList.deleteWishData(id).subscribe({
           next: (res) => {
             console.log(res);
             Swal.fire({
@@ -77,9 +75,8 @@ export class WishListComponent implements OnInit,OnDestroy {
               text: 'Your file has been deleted.',
               icon: 'success',
             });
-            this.wish=res.data;
-            this.wishList.wishNum.next(res.data.length)
-
+            this.wish.set(res.data);
+            this.wishList.wishNum.set(res.data.length);
           },
         });
       }
@@ -87,9 +84,8 @@ export class WishListComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.subGet.unsubscribe();
-      this.subcart.unsubscribe();
-      this.subdel.unsubscribe()
+    this.subGet.unsubscribe();
+    this.subcart.unsubscribe();
+    this.subdel.unsubscribe();
   }
-
 }

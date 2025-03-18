@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { CategoriesService } from '../../Core/Services/categories/categories.service';
 import { Icategories } from '../../Shared/Interfaces/icategories';
 import { RouterLink } from '@angular/router';
@@ -8,13 +8,13 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-categories',
-  imports: [ RouterLink, TranslatePipe],
+  imports: [ RouterLink],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent  {
   private readonly categoriesService = inject(CategoriesService);
-  categories: Icategories[] = [];
+  categories:WritableSignal<Icategories[]> = signal([]);
   subData:Subscription = new Subscription()
 
 
@@ -26,7 +26,7 @@ export class CategoriesComponent  {
   this.categoriesService.getCategoryData().subscribe({
     next:(res)=>{
       console.log(res.data)
-      this.categories = res.data
+      this.categories.set(res.data)
     }
   })
  }

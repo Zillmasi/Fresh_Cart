@@ -1,5 +1,5 @@
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input, Signal } from '@angular/core';
 
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -20,23 +20,14 @@ export class NavBarComponent {
   private readonly translateService = inject(TranslateService)
   private readonly wishListService = inject(WishListService)
   isLogin = input<boolean>(true);
-  count:number = 0;
-  wishCount:number = 0
+  count:Signal<number>= computed(()=> this.cartService.cartCount())
+  wishCount:Signal<number>= computed(()=> this.wishListService.wishNum())
   
   ngOnInit(): void {
 
     this.getNumCart()
     this.getNumWish()
-    this.cartService.cartCount.subscribe({
-      next:(res)=>{
-        this.count = res
-      }
-    })
-    this.wishListService.wishNum.subscribe({
-      next:(res)=>{
-        this.wishCount =res
-      }
-    })
+
     
   }
 
@@ -44,7 +35,7 @@ export class NavBarComponent {
 getNumWish(){
   this.wishListService.getWishData().subscribe({
     next:(res)=>{
-      this.wishCount = res.count
+      this.wishListService.wishNum.set(res.count)
     }
  } )
   }
@@ -53,8 +44,7 @@ getNumWish(){
   getNumCart(){
     this.cartService.getDataCart().subscribe({
       next:(res)=>{
-        console.log(res)
-        this.count = res.numOfCartItems
+    this.cartService.cartCount.set(res.numOfCartItems)
       }
     })
   }

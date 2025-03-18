@@ -3,7 +3,7 @@ import { CartService } from './../../Core/Services/Cart/cart.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IAllProducts } from '../../Shared/Interfaces/iall-products';
 import { ProductsService } from './../../Core/Services/products/products.service';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { SplitPipe } from '../../Shared/Pipes/split.pipe';
 import { NgxPaginationModule ,PaginatePipe } from 'ngx-pagination';
@@ -28,7 +28,7 @@ export class ProductsComponent {
   private readonly CartService = inject(CartService);
   private readonly toastr = inject(ToastrService);
     private readonly wishList = inject(WishListService);
-  AllProducts:IAllProducts[] = [];
+  AllProducts:WritableSignal<IAllProducts[]> = signal([]);
   Page:number=1
   text:string = '';
 
@@ -46,7 +46,7 @@ export class ProductsComponent {
   this.subGetData=  this._ProductsService.getAllProducts().subscribe({
       next:(res)=>{
         console.log(res.data)
-        this.AllProducts = res.data
+        this.AllProducts.set(res.data)
       }
     })
   }
@@ -79,7 +79,7 @@ export class ProductsComponent {
             "Product added successfully to your wishlist",
             'Fresh Cart'
           );
-          this.wishList.wishNum.next(res.data.length)
+          this.wishList.wishNum.set(res.data.length)
         }
       }
     })

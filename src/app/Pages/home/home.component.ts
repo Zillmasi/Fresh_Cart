@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 
 import { Iproducts } from '../../Shared/Interfaces/iproducts';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
@@ -36,8 +36,8 @@ export class HomeComponent implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly toastr = inject(ToastrService);
   private readonly wishList = inject(WishListService);
-  products: Iproducts[] = [];
-  categories: Icategories[] = [];
+  products:WritableSignal<Iproducts[]> = signal([])
+  categories:WritableSignal<Icategories[]> = signal([])
   text: string = '';
   subData: Subscription = new Subscription();
   subcat: Subscription = new Subscription();
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
   GetAllData(): void {
     this.subData = this.productsService.getAllProducts().subscribe({
       next: (res) => {
-        this.products = res.data;
+        this.products.set(res.data)
       },
 
       error: (err) => {
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
   GetAllCat(): void {
     this.subcat = this.categoriesService.getCategoryData().subscribe({
       next: (res) => {
-        this.categories = res.data;
+        this.categories.set(res.data);
       },
 
       error: (err) => {
@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
               'Product added successfully to your cart',
               'Fresh Cart'
             );
-            this.cartService.cartCount.next(res.numOfCartItems)
+            this.cartService.cartCount.set(res.numOfCartItems)
           }
         },
         error: (err) => {
@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
               "Product added successfully to your wishlist",
               'Fresh Cart'
             );
-            this.wishList.wishNum.next(res.data.length)
+            this.wishList.wishNum.set(res.data.length)
           }
         }
       })
